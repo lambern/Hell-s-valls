@@ -27,6 +27,8 @@ BasicGame.Preloader.prototype = {
 		this.game.load.image('font2', 'fonts/KNIGHT3.png');
 		this.load.image('menu', 'images/menu.png');
 		this.load.audio('titleMusic', ['audio/main_menu.ogg']);
+		this.load.audio('gameOver', ['audio/gameover.wav']);
+		this.load.audio('gameOverMain', ['audio/HorseSteppin.ogg']);
 		this.load.audio('easy', ['audio/easy.ogg']);
 		this.load.audio('medium', ['audio/medium.ogg']);
 		this.load.audio('hard', ['audio/hard.ogg']);

@@ -34,7 +34,9 @@ BasicGame.Game = function (game) {
     this.playButton;
     this.font;
     this.image;
+    this.gameOver;
     this.timerPress = 0;
+    this.musicOver;
     var valls;
     var texture;
     var emitter;
@@ -285,6 +287,11 @@ BasicGame.Game.prototype = {
 
 // Collision listener
     detectCollide: function() {
+
+        this.musicMain.stop();
+
+        this.gameOver = this.add.audio('gameOver');
+        this.gameOver.play();
         //remove mouse event and release pointer
         this.game.input.onDown.remove(this.requestLock, this);
         this.game.input.mouse.locked = false;
@@ -308,7 +315,10 @@ BasicGame.Game.prototype = {
     },
 
     displayGameOver: function() {
+        this.gameOver.stop();
 
+        this.musicOver = this.add.audio('gameOverMain');
+        this.musicOver.fadeIn('2000');
         this.ready = true;
 
         var gameOver = this.game.add.retroFont('font2', 31, 25, Phaser.RetroFont.TEXT_SET6, 10, 1, 1);
@@ -345,6 +355,7 @@ BasicGame.Game.prototype = {
 
     quitGame: function (pointer) {
 
+        this.musicOver.stop();
         this.game.global.score = this.score;
         this.game.global.tmpScore = this.score;
         if(this.game.global.tmpScore > this.game.global.bestScore) {
@@ -376,9 +387,9 @@ BasicGame.Game.prototype = {
             break;
         }
 
-        this.musicMain.stop();
+       
         this.state.start('GameMenu');
-        
+
     },
 
     ////
